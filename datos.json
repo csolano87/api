@@ -1,0 +1,27 @@
+{
+        
+        "area": "",
+        "nombres": "LUIS MAURICIO", 		       --OK
+        "apellidos": "PADILLA CORREA",  	       --OK
+        "correoPaciente": "",
+        "tipoIdentificacion": "",
+        "numeroIdentificacion": 1723651004	       --OK
+        "fechaNacimiento": "13/03/1994",               --OK
+        "sexo": "M",		      		      ---OK							
+        "seguromedico": "",
+        "antecedentespersonales": "",
+        "diagnosticoCIE10": "",
+        "numeroHistoriaMedica": ,
+        "fechaSolicitudExamen": "03/11/2021",
+        "horaSolicitudExamen": "",
+        "numerOrdenExamen": "HIS0000000000001", 	--OK
+        "grupoprueba": "",
+        "nombreGrupo": "",
+        "codigotest": 340001,              		--OK
+        "nombretest": "BIOMETRIA HEMATICA +VS",         --OK
+        "medicoreferente": "",
+        "numerocedulaMedico": ,
+        "nombresMedico": "",
+        "numTelefonoMedico": "",
+        "correomedico": "",
+        

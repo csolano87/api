@@ -1,12 +1,20 @@
 const { Router } = require('express');
+const { createorden,getingreso2,addOrden,getingreso,getingresoById,createFile } = require('../controllers/index.controller');
 const router = Router();
 
-const { createorden,getingreso,createarchivo} = require('../controllers/index.controller');
+//const { getingreso2,readFile,addOrden,getingreso,getingresoById,createFile} = require('./');
+
 
 //routes
-router.post('/add', createorden);
+router.post('/add', addOrden);
+router.get('/ingreso/:numerordenexamen', getingresoById);
 router.get('/ingreso', getingreso);
-router.post('/archivo', createarchivo);
+router.post('/createfile', createFile);
+//router.get('/leerarchivo', readFile);
+router.get('./ingreso2', getingreso2);
+router.post('/createOrden', createorden);
+//soap
+
 
 
 
