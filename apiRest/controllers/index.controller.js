@@ -7,6 +7,7 @@ const { Pool } = require('pg');
 const fs = require("fs");
 const { resolve } = require('path');
 const { rejects } = require('assert');
+const e = require('express');
 //   NOMBRE_ARCHIVO = "archivo.txt";
 const pool = new Pool({
     user: 'postgres',
@@ -33,14 +34,6 @@ const mili = timestamp.getMilliseconds() < 10 ? '0' + timestamp.getMilliseconds(
 
 const getingresoById = async (req, res) => {
 
-    // const timestamp = new Date(Date.now());
-    // const year = timestamp.getFullYear().toString();
-    // const month = timestamp.getMonth() < 10 ? '0' + timestamp.getMonth().toString() : timestamp.getMonth().toString();
-    // const day = timestamp.getDate() < 10 ? '0' + timestamp.getDate().toString() : timestamp.getDate().toString();
-    // const hour = timestamp.getHours() < 10 ? '0' + timestamp.getHours().toString() : timestamp.getHours().toString();
-    // const minutes = timestamp.getMinutes() < 10 ? '0' + timestamp.getMinutes().toString() : timestamp.getMinutes().toString();
-    // const seconds = timestamp.getSeconds() < 10 ? '0' + timestamp.getSeconds().toString() : timestamp.getSeconds().toString();
-    // const mili = timestamp.getMilliseconds() < 10 ? '0' + timestamp.getMilliseconds().toString() : timestamp.getMilliseconds().toString();
     
       const numerordenexamen= parseInt(req.params.numerordenexamen);
 
@@ -63,8 +56,8 @@ const getingresoById = async (req, res) => {
 
 
 const getingreso = async (req, res) => {
-    const response = await pool.query('SELECT * FROM ingreso ORDER BY id ASC');
-    res.status(200).json(response.rows);
+    const response = await pool.query('select c.name,c.lastname,c.secondlastname,c.birthday,c.identifier,c.fecha,c.code,c.sex,c.observation,e.productoid,e.productoname from cabecera c inner join cuerpo e on c.code= e.codigo_code');
+    res.status(200).json(response);
 };
 
 //Metodo de insert a BD
@@ -78,8 +71,7 @@ const addOrden = async (req,res) => {
     
        
         
-       const ingreso=
-        new Promise  (async()=>{
+       const ingreso= new Promise  (async()=>{
         try{
             const numerordenexamen= parseInt(req.body.numerordenexamen);
           
@@ -100,7 +92,7 @@ const addOrden = async (req,res) => {
                    res.send('Se ha  creado con el exito la orden:' +req.body.numerordenexamen)
                    
                if(fs.existsSync(filename)){
-                   estado='creado';
+                   
                    const numerordenexamen= parseInt(req.body.numerordenexamen);
                    console.log(numerordenexamen)
                 const response = await  pool.query(`UPDATE  ingreso SET estado =${estado} WHERE numerordenexamen = $1`, [numerordenexamen]);
@@ -150,16 +142,7 @@ const createFile = async (req, res) => {
 
 const readFile = async (req, res)=> {
     
-    // let fs = require('fs');
-
-
-    // fs.readFile('2110283952-HC-14378-591.txt', 'utf-8', (err, data) => {
-    //   if(err) {
-    //     console.log('error: ', err);
-    //   } else {
-    //     console.log(data);
-    //   }
-    // });
+    
 };
 const getingreso2 = async (req, res) => {
     const response = await pool.query('SELECT * FROM ingreso ORDER BY id ASC');
@@ -168,10 +151,55 @@ const getingreso2 = async (req, res) => {
 
 const createorden = async (req, res) => {
 
+    const {  CODE,DATE,IDENTIFIER,NAME,LASTNAME,SECONDLASTNAME,BIRTHDAY,SEX,OBSERVATION} = req.body.Header;
+   
+    const response = await pool.query('INSERT INTO cabecera (name,lastname,secondlastname,birthday,identifier,fecha,code,sex,observation,createtime) VALUES ($1, $2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING code', [ NAME,LASTNAME,SECONDLASTNAME,BIRTHDAY,IDENTIFIER,DATE,CODE,SEX,OBSERVATION,timestamp]);
 
+    const { code } = response.rows[0];
+    req.body.Lines.forEach(async(item)=>{  
+       
+        const response = await pool.query('INSERT INTO cuerpo (codigo_code,productoid,productoname) VALUES ($1, $2,$3) ', [code,item.PRODUCTOID,item.PRODUCTONAME]);
+       //${item.PRODUCTOID}|${item.PRODUCTONAME}
+
+       console.log(item.PRODUCTOID)
   
-    res.send('archivo reenviado  con exito..');
-   // console.log(req.body)
+    
+    
+        try {
+            if    (CODE===code){
+                //const lines= req.boby.Lines.map(e=>e.PRODUCTOID, e.PRODUCTONAME)
+                //console.log(lines)
+                const filename = `${code}-${year}${month}${day}-${hour}${minutes}-${seconds}-${mili}.txt`
+                const DATA = `MSH|^~\&|${CODE}|${DATE}|${IDENTIFIER}|
+PID|1|${NAME} ${LASTNAME} ${SECONDLASTNAME}|
+PV1||O||R^RUTINA|||||||${BIRTHDAY}|${SEX}|
+ORC|NW|2110293974||||||||${OBSERVATION}|
+OBR|1|||${item.PRODUCTOID}|${item.PRODUCTONAME}`
+           
+            fs.writeFileSync(`${filename}`,`${DATA}`)
+             if(fs.existsSync(filename)){                  
+             let   estado='creado';
+             const response = await  pool.query(`UPDATE  cabecera SET estado =$1, modifytime=$2 WHERE code = $3`, [estado,timestamp,code]);
+             res.send('Se ha  creado con el exito la orden:')
+            }
+        }
+        } catch (error) {
+            
+        }
+    })
+                 
+                   
+              
+           
+       
+
+       
+
+    // res.json({
+    //     message: "Usuario creado satisfactoriamente",
+    //     user: { code},
+    //   });
+    
 };
 module.exports = {
     addOrden,

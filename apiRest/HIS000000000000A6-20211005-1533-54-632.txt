@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "codigo_code": "HIS00000000000066",
+        "productoid": 340001,
+        "productoname": "BIOMETRIA HEMATICA +VSG"
+    },
+    {
+        "id": 2,
+        "codigo_code": "HIS00000000000066",
+        "productoid": 360021,
+        "productoname": "COLESTEROL TOTAL"
+    },
+    {
+        "id": 3,
+        "codigo_code": "HIS00000000000056",
+        "productoid": 340001,
+        "productoname": "BIOMETRIA HEMATICA +VSG"
+    },
+    {
+        "id": 4,
+        "codigo_code": "HIS00000000000056",
+        "productoid": 360021,
+        "productoname": "COLESTEROL TOTAL"
+    },
+    {
+        "id": 5,
+        "codigo_code": "HIS00000000000036",
+        "productoid": 340001,
+        "productoname": "BIOMETRIA HEMATICA +VSG"
+    },
+    {
+        "id": 6,
+        "codigo_code": "HIS00000000000036",
+        "productoid": 360021,
+        "productoname": "COLESTEROL TOTAL"
+    },
+    {
+        "id": 7,
+        "codigo_code": "HIS00000000000086",
+        "productoid": 340001,
+        "productoname": "BIOMETRIA HEMATICA +VSG"
+    },
+    {
+        "id": 8,
+        "codigo_code": "HIS00000000000086",
+        "productoid": 360021,
+        "productoname": "COLESTEROL TOTAL"
+    },
+    {
+        "id": 9,
+        "codigo_code": "HIS000000000000e6",
+        "productoid": 340001,
+        "productoname": "BIOMETRIA HEMATICA +VSG"
+    },
+    {
+        "id": 10,
+        "codigo_code": "HIS000000000000e6",
+        "productoid": 360021,
+        "productoname": "COLESTEROL TOTAL"
+    },
+    {
+        "id": 11,
+        "codigo_code": "HIS000000000000v6",
+        "productoid": 340001,
+        "productoname": "BIOMETRIA HEMATICA +VSG"
+    },
+    {
+        "id": 12,
+        "codigo_code": "HIS000000000000v6",
+        "productoid": 360021,
+        "productoname": "COLESTEROL TOTAL"
+    },
+    {
+        "id": 13,
+        "codigo_code": "HIS000000000000A6",
+        "productoid": 340001,
+        "productoname": "BIOMETRIA HEMATICA +VSG"
+    },
+    {
+        "id": 14,
+        "codigo_code": "HIS000000000000A6",
+        "productoid": 360021,
+        "productoname": "COLESTEROL TOTAL"
+    },
+    {
+        "id": 15,
+        "codigo_code": "HIS00000000000AA6",
+        "productoid": 340001,
+        "productoname": "BIOMETRIA HEMATICA +VSG"
+    },
+    {
+        "id": 16,
+        "codigo_code": "HIS00000000000AA6",
+        "productoid": 360021,
+        "productoname": "COLESTEROL TOTAL"
+    }
+]

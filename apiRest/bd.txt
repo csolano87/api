@@ -1,0 +1,30 @@
+select * from cabecera
+
+drop table cabecera, cuerpo
+
+create table cuerpo(
+	id serial PRIMARY KEY,
+codigo_code varchar(40),
+productoid integer,
+productoname varchar(40),
+FOREIGN KEY (codigo_code)
+REFERENCES cabecera(code)
+);
+
+
+create table cabecera(
+id serial ,
+name varchar(40),
+lastname varchar(40),
+secondlastname varchar(40),
+birthday date,
+	identifier integer,
+	fecha date,
+code varchar(40) PRIMARY KEY,
+sex varchar(1),
+observation varchar(40),
+estado varchar ( 40) default 'ingresado');
+
+
+
+ALTER TABLE cabecera ADD COLUMN modifyTime timestamp;
